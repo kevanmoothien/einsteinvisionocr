@@ -1,0 +1,22 @@
+<template>
+    <lightning-card  title="Hello">
+        <div slot="actions">
+            <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved" size="x-small"></lightning-icon>
+            <lightning-icon icon-name="action:delete" alternative-text="Delete" title="Delete" size="x-small"></lightning-icon>
+        </div>
+        <div class="slds-p-horizontal_small">
+            <lightning-input type="email" label="Email"></lightning-input>
+            <lightning-file-upload
+                label="Upload einstein_platform.pem"
+                name="fileUploader"
+                accept=".pem"
+                record-id={setupRecordId}
+                onuploadfinished={handleUploadFinished}>
+            </lightning-file-upload>
+        </div>
+        <div slot="footer">
+            <lightning-button variant="brand" label="Save" title="Save" onclick={save} class="slds-m-left_x-small"></lightning-button>
+            <lightning-button variant="destructive" label="Reset" title="Reset" onclick={reset} class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </lightning-card>
+</template>
