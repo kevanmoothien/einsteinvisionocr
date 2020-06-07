@@ -1,8 +1,8 @@
 <template>
-    <lightning-card>
+    <lightning-card title="Setup">
         <div slot="actions">
-            <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved" size="x-small"></lightning-icon>
-            <lightning-icon icon-name="action:delete" alternative-text="Delete" title="Delete" size="x-small"></lightning-icon>
+            <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved" size="x-small" if:true={valid}></lightning-icon>
+            <lightning-icon icon-name="action:close" alternative-text="Delete" title="Delete" size="x-small" if:false={valid}></lightning-icon>
         </div>
         <div class="slds-p-horizontal_small">
             <lightning-input class="input-email" type="email" label="Email" onchange={handleEmailChange} value={email}></lightning-input>

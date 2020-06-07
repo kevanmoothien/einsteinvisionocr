@@ -1,23 +1,37 @@
 import { LightningElement, api } from 'lwc'
 import saveCredential from '@salesforce/apex/EinsteinSetupController.saveCredential'
 import importCredential from '@salesforce/apex/EinsteinSetupController.importCredential'
+import testEinsteinAPI from '@salesforce/apex/EinsteinSetupController.testEinsteinAPI'
 
 export default class EinsteinSetup extends LightningElement {
     cert
     email
+    valid = false
 
     connectedCallback() {
         importCredential().then((res)=>{
             console.log(res)
             this.email = res.email
+            if (this.email != null) {
+                console.log('mo ici')
+                testEinsteinAPI().then((res)=>{
+                    this.valid = res
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
         })
     }
 
     save() {
-        console.log('omodmeodemode')
         const email = this.template.querySelector('.input-email').value
         saveCredential({ email: email, cert: this.cert }).then((res)=>{
-            console.log(res)
+            if (res != null) {
+                testEinsteinAPI().then((success)=> {
+                    console.log(success)
+                    this.valid = success
+                })
+            }
         })
     }
 
@@ -37,7 +51,7 @@ export default class EinsteinSetup extends LightningElement {
 
     processCertificateFile(file) {
         this.fileReader(file, (error, result)=>{
-            this.cert = result.replace(/\r\n/g, '|')
+            this.cert = result.replace(/\n/g, '|')
         })
     }
 }

@@ -25,4 +25,12 @@ public with sharing class EinsteinSetupController {
         };
         return outputMap;
     }
+
+    @AuraEnabled
+    public static boolean testEinsteinAPI(){
+        if (String.isNotBlank(EinsteinVisionUtils.accessToken())) {
+            return true;
+        }
+        return false;
+    }
 }
