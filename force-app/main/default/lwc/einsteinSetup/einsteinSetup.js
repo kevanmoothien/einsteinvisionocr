@@ -10,10 +10,8 @@ export default class EinsteinSetup extends LightningElement {
 
     connectedCallback() {
         importCredential().then((res)=>{
-            console.log(res)
             this.email = res.email
             if (this.email != null) {
-                console.log('mo ici')
                 testEinsteinAPI().then((res)=>{
                     this.valid = res
                 }).catch(err => {
@@ -28,7 +26,6 @@ export default class EinsteinSetup extends LightningElement {
         saveCredential({ email: email, cert: this.cert }).then((res)=>{
             if (res != null) {
                 testEinsteinAPI().then((success)=> {
-                    console.log(success)
                     this.valid = success
                 })
             }
