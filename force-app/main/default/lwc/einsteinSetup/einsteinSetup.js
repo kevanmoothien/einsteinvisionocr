@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc'
+import { LightningElement } from 'lwc'
 import saveCredential from '@salesforce/apex/EinsteinSetupController.saveCredential'
 import importCredential from '@salesforce/apex/EinsteinSetupController.importCredential'
 import testEinsteinAPI from '@salesforce/apex/EinsteinSetupController.testEinsteinAPI'
