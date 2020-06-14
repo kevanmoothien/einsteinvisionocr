@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Result Preview">
+        <div class="slds-p-horizontal_small">
+            <lightning-tabset>
+                <lightning-tab label="Formatted">
+                    <lightning-datatable
+                        key-field="id"
+                        data={data}
+                        columns={columns}
+                        hide-checkbox-column="false"></lightning-datatable>
+                </lightning-tab>
+                <lightning-tab label="Raw">
+                    <pre>
+                        {raw}
+                    </pre>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </lightning-card>
+</template>

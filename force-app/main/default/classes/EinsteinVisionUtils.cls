@@ -41,4 +41,49 @@ public with sharing class EinsteinVisionUtils {
         }
         return string.valueOf(text);
     }
+
+    public static Prediction scanBusinessCard(string imageUrl) {
+        string modelId = 'OCRModel';
+        string task = 'contact';
+        string endpoint = 'https://api.einstein.ai/v2/vision/ocr';
+
+        string contentType = HttpFormBuilder.GetContentType();
+        //  Compose the form
+        string form64 = '';
+
+        form64 += HttpFormBuilder.WriteBoundary();
+        form64 += HttpFormBuilder.WriteBodyParameter('modelId', EncodingUtil.urlEncode(modelId, 'UTF-8'));
+        form64 += HttpFormBuilder.WriteBoundary();
+        form64 += HttpFormBuilder.WriteBodyParameter('task', task);
+        form64 += HttpFormBuilder.WriteBoundary();
+        form64 += HttpFormBuilder.WriteBodyParameter('sampleLocation', imageUrl);
+        form64 += HttpFormBuilder.WriteBoundary(HttpFormBuilder.EndingType.CrLf);
+
+        blob formBlob = EncodingUtil.base64Decode(form64);
+        string contentLength = string.valueOf(formBlob.size());
+        //  Compose the http request
+        HttpRequest httpRequest = new HttpRequest();
+
+        httpRequest.setBodyAsBlob(formBlob);
+        httpRequest.setHeader('Connection', 'keep-alive');
+        httpRequest.setHeader('Content-Length', contentLength);
+        httpRequest.setHeader('Content-Type', contentType);
+        httpRequest.setMethod('POST');
+        httpRequest.setTimeout(120000);
+        httpRequest.setHeader('Authorization','Bearer ' + accessToken());
+        httpRequest.setEndpoint(endpoint);
+
+        Http http = new Http();
+        HTTPResponse res = http.send(httpRequest);
+
+        Prediction predictResponse;
+        if (res.getStatusCode() == 200) {
+            predictResponse = (Prediction) JSON.deserialize(res.getBody(), Prediction.class);
+        }
+        else {
+            predictResponse = new Prediction();
+            predictResponse.error = res.getBody();
+        }
+        return predictResponse;
+    }
 }

@@ -1,0 +1,20 @@
+<template>
+    <lightning-layout multiple-rows="true">
+        <lightning-layout-item class="slds-p-around_xx-small" size="4">
+            <lightning-card title="Business Card">
+                <div class="slds-p-horizontal_small">
+                    <lightning-input type="url" label="Image URL" class="input-image-url" placeholder="Enter Business Card Image URL" ></lightning-input>
+                </div>
+                <div slot="footer">
+                    <lightning-button variant="brand" label="Scan" title="Scan" onclick={scan} class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </lightning-card>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-p-around_xx-small" size="8">
+            <c-einstein-image-preview image-url={imageUrl} ></c-einstein-image-preview>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-p-around_xx-small" size="12">
+            <c-einstein-result-preview result={scanResult}></c-einstein-result-preview>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
