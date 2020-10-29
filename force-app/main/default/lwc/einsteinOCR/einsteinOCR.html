@@ -3,10 +3,19 @@
         <lightning-layout-item class="slds-p-around_xx-small" size="4">
             <lightning-card title="Business Card">
                 <div class="slds-p-horizontal_small">
-                    <lightning-input type="url" label="Image URL" class="input-image-url" placeholder="Enter Business Card Image URL" ></lightning-input>
+                    <lightning-input type="url" label="Image URL" class="input-business-url" placeholder="Enter Business Card Image URL" ></lightning-input>
                 </div>
                 <div slot="footer">
-                    <lightning-button variant="brand" label="Scan" title="Scan" onclick={scan} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Scan Business Card" title="Scan Business Card" onclick={scan} class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </lightning-card>
+            <br />
+            <lightning-card title="Table">
+                <div class="slds-p-horizontal_small">
+                    <lightning-input type="url" label="Table Image URL" class="input-table-url" placeholder="Enter Table Image URL" ></lightning-input>
+                </div>
+                <div slot="footer">
+                    <lightning-button variant="brand" label="Scan Table" title="Scan Table" onclick={scanTable} class="slds-m-left_x-small"></lightning-button>
                 </div>
             </lightning-card>
         </lightning-layout-item>
