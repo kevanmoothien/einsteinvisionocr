@@ -19,5 +19,11 @@ public class Prediction {
 
     public class Attribute {
         @AuraEnabled public string tag;
+        @AuraEnabled public CellLocation cellLocation;
+    }
+
+    public class CellLocation {
+        @AuraEnabled public integer rowIndex;
+        @AuraEnabled public integer colIndex;
     }
 }
